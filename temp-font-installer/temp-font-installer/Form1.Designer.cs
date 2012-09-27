@@ -28,32 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Test-font.ttf");
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.listFonts = new System.Windows.Forms.ListView();
             this.colHeadFilname = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnAddFont = new System.Windows.Forms.Button();
             this.btnInstallNow = new System.Windows.Forms.Button();
+            this.dlgAddFont = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
-            // listView1
+            // listFonts
             // 
-            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.listFonts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView1.CheckBoxes = true;
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.listFonts.CheckBoxes = true;
+            this.listFonts.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colHeadFilname});
-            this.listView1.GridLines = true;
-            this.listView1.HideSelection = false;
-            listViewItem1.StateImageIndex = 0;
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
-            this.listView1.Location = new System.Drawing.Point(12, 12);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(324, 154);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.listFonts.GridLines = true;
+            this.listFonts.HideSelection = false;
+            this.listFonts.Location = new System.Drawing.Point(12, 12);
+            this.listFonts.Name = "listFonts";
+            this.listFonts.Size = new System.Drawing.Size(324, 154);
+            this.listFonts.TabIndex = 0;
+            this.listFonts.UseCompatibleStateImageBehavior = false;
+            this.listFonts.View = System.Windows.Forms.View.Details;
             // 
             // colHeadFilname
             // 
@@ -79,6 +76,11 @@
             this.btnInstallNow.Text = "Install Fonts Now";
             this.btnInstallNow.UseVisualStyleBackColor = true;
             // 
+            // dlgAddFont
+            // 
+            this.dlgAddFont.Filter = "Font Files|*.ttf;*.otf";
+            this.dlgAddFont.Multiselect = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -86,7 +88,7 @@
             this.ClientSize = new System.Drawing.Size(349, 206);
             this.Controls.Add(this.btnInstallNow);
             this.Controls.Add(this.btnAddFont);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.listFonts);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -95,10 +97,11 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView listFonts;
         private System.Windows.Forms.ColumnHeader colHeadFilname;
         private System.Windows.Forms.Button btnAddFont;
         private System.Windows.Forms.Button btnInstallNow;
+        private System.Windows.Forms.OpenFileDialog dlgAddFont;
 
     }
 }
