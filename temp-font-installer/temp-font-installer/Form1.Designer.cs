@@ -75,6 +75,7 @@
             this.btnInstallNow.TabIndex = 2;
             this.btnInstallNow.Text = "Install Fonts Now";
             this.btnInstallNow.UseVisualStyleBackColor = true;
+            this.btnInstallNow.Click += new System.EventHandler(this.btnInstallNow_Click);
             // 
             // dlgAddFont
             // 
