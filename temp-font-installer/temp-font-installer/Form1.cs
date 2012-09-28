@@ -7,11 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace temp_font_installer
 {
     public partial class Form1 : Form
     {
+        private static IntPtr HWND_BROADCAST = new IntPtr(0xffff);
+
+        [DllImport("gdi32.dll")]
+        static extern int AddFontResource(string lpszFilename);
+
+        [return: MarshalAs(UnmanagedType.Bool)]
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern bool PostMessage(IntPtr hWnd, WindowMessages Msg, IntPtr wParam, IntPtr lParam);
+
         string APP_DATA = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "temp-font-installer");
         public Form1()
         {
@@ -70,7 +80,27 @@ namespace temp_font_installer
 
         private void btnInstallNow_Click(object sender, EventArgs e)
         {
+            int count = 0;
+            foreach (ListViewItem i in listFonts.CheckedItems)
+            {
+                AddFontResource(Path.Combine(APP_DATA, i.Text));
+                count++;
+                statusProgress.Value = (int)(((float)count) / ((float)listFonts.CheckedItems.Count) * 95.0);
+                statusPercent.Text = String.Format("{0:0%}", (float)statusProgress.Value/100.0);
+            }
 
+            bool posted = PostMessage(HWND_BROADCAST, WindowMessages.FONTCHANGE, IntPtr.Zero, IntPtr.Zero);
+            if (!posted)
+            {
+                Console.WriteLine("New error: " + Marshal.GetLastWin32Error());
+                statusProgress.Value = 0;
+                statusPercent.Text = String.Format("{0:0%}", (float)statusProgress.Value / 100.0);
+            }
+            else
+            {
+                statusProgress.Value = 100;
+                statusPercent.Text = String.Format("{0:0%}", (float)statusProgress.Value / 100.0);
+            }
         }
     }
 }

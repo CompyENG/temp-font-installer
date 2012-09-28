@@ -33,6 +33,10 @@
             this.btnAddFont = new System.Windows.Forms.Button();
             this.btnInstallNow = new System.Windows.Forms.Button();
             this.dlgAddFont = new System.Windows.Forms.OpenFileDialog();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statusPercent = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusProgress = new System.Windows.Forms.ToolStripProgressBar();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // listFonts
@@ -82,17 +86,44 @@
             this.dlgAddFont.Filter = "Font Files|*.ttf;*.otf";
             this.dlgAddFont.Multiselect = true;
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusProgress,
+            this.statusPercent});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 207);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(349, 22);
+            this.statusStrip1.TabIndex = 3;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // statusPercent
+            // 
+            this.statusPercent.Name = "statusPercent";
+            this.statusPercent.Size = new System.Drawing.Size(0, 17);
+            this.statusPercent.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // statusProgress
+            // 
+            this.statusProgress.Name = "statusProgress";
+            this.statusProgress.Size = new System.Drawing.Size(100, 16);
+            this.statusProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(349, 206);
+            this.ClientSize = new System.Drawing.Size(349, 229);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.btnInstallNow);
             this.Controls.Add(this.btnAddFont);
             this.Controls.Add(this.listFonts);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -103,6 +134,9 @@
         private System.Windows.Forms.Button btnAddFont;
         private System.Windows.Forms.Button btnInstallNow;
         private System.Windows.Forms.OpenFileDialog dlgAddFont;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripProgressBar statusProgress;
+        private System.Windows.Forms.ToolStripStatusLabel statusPercent;
 
     }
 }
