@@ -32,6 +32,9 @@ namespace temp_font_installer
                     //Console.WriteLine(fileName);
                     //Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
                     FileInfo info = new FileInfo(fileName);
+
+                    // If the font list already contains this font, just skip it
+                    if (listFonts.Items.ContainsKey(info.Name)) continue;
                     
                     try
                     {
@@ -42,11 +45,13 @@ namespace temp_font_installer
                     catch (Exception ex)
                     {
                         Console.WriteLine("Exception occured: " + ex.ToString());
+                        MessageBox.Show(String.Format("Error copying {0} into fonts directory.", fileName), "Error copying file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                     }
                     
+                    // Create the new item to add to the list
                     ListViewItem newItem = new ListViewItem(info.Name);
                     newItem.Checked = true;
-
                     listFonts.Items.Add(newItem);
                 }
             }
