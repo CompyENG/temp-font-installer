@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -23,6 +24,9 @@ namespace temp_font_installer
         static extern bool PostMessage(IntPtr hWnd, WindowMessages Msg, IntPtr wParam, IntPtr lParam);
 
         string APP_DATA = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "temp-font-installer");
+
+        PrivateFontCollection fonts;
+        
         public Form1()
         {
             InitializeComponent();
@@ -30,6 +34,8 @@ namespace temp_font_installer
             if(!Directory.Exists(APP_DATA)) {
                 Directory.CreateDirectory(APP_DATA);
             }
+
+            fonts = new PrivateFontCollection();
         }
 
         private void btnAddFont_Click(object sender, EventArgs e)
@@ -71,10 +77,16 @@ namespace temp_font_installer
                     return;
                 }
 
+                PrivateFontCollection tempCollection = new PrivateFontCollection();
+                tempCollection.AddFontFile(Path.Combine(APP_DATA, info.Name));
+                fonts.AddFontFile(Path.Combine(APP_DATA, info.Name));
+
                 // Create the new item to add to the list
-                ListViewItem newItem = new ListViewItem(info.Name);
+                ListViewItem newItem = new ListViewItem(tempCollection.Families[0].Name);
                 newItem.Checked = true;
                 listFonts.Items.Add(newItem);
+
+                tempCollection.Dispose();
             }
         }
 
