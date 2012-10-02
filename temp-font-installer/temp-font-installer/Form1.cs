@@ -84,6 +84,7 @@ namespace temp_font_installer
                 // Create the new item to add to the list
                 ListViewItem newItem = new ListViewItem(tempCollection.Families[0].Name);
                 newItem.Checked = true;
+                newItem.Font = new Font(tempCollection.Families[0], 12);
                 listFonts.Items.Add(newItem);
 
                 tempCollection.Dispose();
