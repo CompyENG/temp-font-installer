@@ -36,6 +36,8 @@ namespace temp_font_installer
             }
 
             fonts = new PrivateFontCollection();
+
+            scanAndAdd();
         }
 
         private void btnAddFont_Click(object sender, EventArgs e)
@@ -47,7 +49,7 @@ namespace temp_font_installer
             }
         }
 
-        public void addFonts(string[] filePaths)
+        public void addFonts(string[] filePaths, bool copy=true)
         {
             foreach (string fileName in filePaths)
             {
@@ -64,17 +66,20 @@ namespace temp_font_installer
                 //  user what we should do?
                 if (listFonts.FindItemWithText(info.Name) != null) continue;
 
-                try
+                if (copy)
                 {
-                    File.Copy(fileName,
-                        Path.Combine(APP_DATA, info.Name),
-                        true);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Exception occured: " + ex.ToString());
-                    MessageBox.Show(String.Format("Error copying {0} into fonts directory.", fileName), "Error copying file", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    try
+                    {
+                        File.Copy(fileName,
+                            Path.Combine(APP_DATA, info.Name),
+                            true);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Exception occured: " + ex.ToString());
+                        MessageBox.Show(String.Format("Error copying {0} into fonts directory.", fileName), "Error copying file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                 }
 
                 PrivateFontCollection tempCollection = new PrivateFontCollection();
@@ -82,8 +87,12 @@ namespace temp_font_installer
                 fonts.AddFontFile(Path.Combine(APP_DATA, info.Name));
 
                 // Create the new item to add to the list
-                ListViewItem newItem = new ListViewItem(tempCollection.Families[0].Name);
+                string[] data = {tempCollection.Families[0].Name, info.Name};
+                ListViewItem newItem = new ListViewItem(data);
                 newItem.Checked = true;
+                // TODO: User configurable font size.
+                // TODO: It seems that the font goes away if you select the item before
+                //   the font is installed. Should I just automatically install fonts?
                 newItem.Font = new Font(tempCollection.Families[0], 12);
                 listFonts.Items.Add(newItem);
 
@@ -91,12 +100,17 @@ namespace temp_font_installer
             }
         }
 
+        private void scanAndAdd()
+        {
+            addFonts(Directory.GetFiles(APP_DATA), false);
+        }
+
         private void btnInstallNow_Click(object sender, EventArgs e)
         {
             int count = 0;
             foreach (ListViewItem i in listFonts.CheckedItems)
             {
-                AddFontResource(Path.Combine(APP_DATA, i.Text));
+                AddFontResource(Path.Combine(APP_DATA, i.SubItems[1].Text));
                 count++;
                 statusProgress.Value = (int)(((float)count) / ((float)listFonts.CheckedItems.Count) * 95.0);
                 statusPercent.Text = String.Format("{0:0%}", (float)statusProgress.Value/100.0);

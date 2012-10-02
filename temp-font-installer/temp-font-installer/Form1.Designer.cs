@@ -34,8 +34,8 @@
             this.btnInstallNow = new System.Windows.Forms.Button();
             this.dlgAddFont = new System.Windows.Forms.OpenFileDialog();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.statusPercent = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusProgress = new System.Windows.Forms.ToolStripProgressBar();
+            this.statusPercent = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,6 +63,7 @@
             // 
             // btnAddFont
             // 
+            this.btnAddFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAddFont.Location = new System.Drawing.Point(13, 172);
             this.btnAddFont.Name = "btnAddFont";
             this.btnAddFont.Size = new System.Drawing.Size(102, 23);
@@ -73,6 +74,7 @@
             // 
             // btnInstallNow
             // 
+            this.btnInstallNow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnInstallNow.Location = new System.Drawing.Point(209, 171);
             this.btnInstallNow.Name = "btnInstallNow";
             this.btnInstallNow.Size = new System.Drawing.Size(126, 23);
@@ -97,17 +99,17 @@
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // statusPercent
-            // 
-            this.statusPercent.Name = "statusPercent";
-            this.statusPercent.Size = new System.Drawing.Size(0, 17);
-            this.statusPercent.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // statusProgress
             // 
             this.statusProgress.Name = "statusProgress";
             this.statusProgress.Size = new System.Drawing.Size(100, 16);
             this.statusProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            // 
+            // statusPercent
+            // 
+            this.statusPercent.Name = "statusPercent";
+            this.statusPercent.Size = new System.Drawing.Size(0, 17);
+            this.statusPercent.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Form1
             // 
